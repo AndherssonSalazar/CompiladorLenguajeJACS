@@ -1,5 +1,7 @@
 package compiladorlenguajejacs;
 
+import compiladorlenguajejacs.clases.ListaEnlazadaDoble;
+import compiladorlenguajejacs.clases.Objeto;
 import compiladorlenguajejacs.interfaces.jfPanelPrincipal;
 
 /**

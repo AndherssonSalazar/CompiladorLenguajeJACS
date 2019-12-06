@@ -292,7 +292,7 @@ public class LexicoSemantico {
 	                                        }
 	                                    }else{
 	                                        codigoAnalizado.add(token);
-	                                        semantico.add(new Objeto(token,null,"strange",null));
+	                                        semantico.add(new Objeto(token,null,"delimitador",null));
 	                                        
 	                                    }
 	                                    /*else{

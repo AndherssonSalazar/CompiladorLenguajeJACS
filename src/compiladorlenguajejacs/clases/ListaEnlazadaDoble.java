@@ -27,6 +27,14 @@ public class ListaEnlazadaDoble <T extends Comparable> implements Iterable<T>{
     public NodoDoble<T> getNodoFinal() {
         return nodoFinal;
     }
+    public NodoDoble<T> getNodo(int i) {
+		// TODO Auto-generated method stub
+    	NodoDoble<T> temporal=nodoInicial;
+    	for (int j=0;i<j ;i++) {
+			temporal=temporal.getSiguiente();
+		} 
+    	return temporal;
+	}
     public int getNumeroNodos(){
         return numeroNodos;
     }

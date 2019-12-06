@@ -31,13 +31,13 @@ public class NodoDoble<T extends Comparable> implements Comparable<T>{
     public void setDato(T dato) {
         this.dato = dato;
     }
-    public NodoDoble getAnterior() {
+    public NodoDoble<T> getAnterior() {
         return anterior;
     }
     public void setAnterior(NodoDoble anterior) {
         this.anterior = anterior;
     }
-    public NodoDoble getSiguiente() {
+    public NodoDoble<T> getSiguiente() {
         return siguiente;
     }
     public void setSiguiente(NodoDoble siguiente) {
