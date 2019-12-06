@@ -10,11 +10,15 @@ import javax.swing.table.DefaultTableModel;
  * @author Andhersson Salazar
  */
 public class jpPanelLexico extends javax.swing.JPanel {
-    private AnalizadorLexico miLexico;
     private DefaultTableModel tablaSimbolos;
-    public jpPanelLexico(AnalizadorLexico miLexico) {
+    public jpPanelLexico() {
         initComponents();
-        this.miLexico=miLexico;
+        
+    }
+    public void Rellenar(AnalizadorLexico miLexico){
+        tablaSimbolos = new DefaultTableModel();
+        tablaSimbolos.setColumnIdentifiers(new Object[]{"Token","Cantidad","Lexema","Tipo"});
+        
         recorrerIterador(miLexico.getPalabrasReservadas(), tablaSimbolos, "Palabra Reservada");
         recorrerIterador(miLexico.getOperadoresAritmeticos(), tablaSimbolos, "Operador Aritmetico");
         recorrerIterador(miLexico.getOperadoresRelacionales(), tablaSimbolos, "Operador Relacional");
@@ -30,18 +34,8 @@ public class jpPanelLexico extends javax.swing.JPanel {
         
         Iterator<String> iterador=miLexico.ObtenerErrores().keySet().iterator();
         String token="";
-        /*if(miLexico.TieneErrores()){
-            while(iterador.hasNext()){
-                token = iterador.next();
-                if(miLexico.ObtenerErrores().get(token) > 0){
-                    txtErrores.setText(txtErrores.getText()+"\nError: "+token+" Cantidad: "+miLexico.ObtenerErrores().get(token)+"\n");
-                }
-            }
-        }*/
-        
         jtTablaAnalizaTodo.setModel(tablaSimbolos);
     }
-
     private void recorrerIteradorNoArray(HashMap<String,Integer> palabras, DefaultTableModel tablaSimbolos,String numeroTok, String nom){
         String token="";
         Iterator<String> iterador=palabras.keySet().iterator();

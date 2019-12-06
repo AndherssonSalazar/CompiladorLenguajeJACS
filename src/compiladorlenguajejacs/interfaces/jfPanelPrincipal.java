@@ -16,11 +16,14 @@ import compiladorlenguajejacs.clases.AnalizadorSintactico;
 public class jfPanelPrincipal extends javax.swing.JFrame {
     private AnalizadorLexico miLexico;
     private AnalizadorSintactico miSintactico;
-    private DefaultTableModel tablaSimbolos;
+    private jpPanelLexico panelLexico;
+    private jpPanelSintactico panelSintactico;
     public jfPanelPrincipal() {
+        initComponents();
         miLexico=new AnalizadorLexico();
         miSintactico=new AnalizadorSintactico();
-        initComponents();
+        panelLexico=new jpPanelLexico();
+        panelSintactico=new jpPanelSintactico();
     }
 
     @SuppressWarnings("unchecked")
@@ -145,25 +148,19 @@ public class jfPanelPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAnalisisLexicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalisisLexicoActionPerformed
-        tablaSimbolos = new DefaultTableModel();
-        tablaSimbolos.setColumnIdentifiers(new Object[]{"Token","Cantidad","Lexema","Tipo"});
-        
         miLexico.Analizar(txtEditorCodigo.getText());
         txtErrores.setText("");
         
-        /*recorrerIterador(miLexico.getPalabrasReservadas(), tablaSimbolos, "Palabra Reservada");
-        recorrerIterador(miLexico.getOperadoresAritmeticos(), tablaSimbolos, "Operador Aritmetico");
-        recorrerIterador(miLexico.getOperadoresRelacionales(), tablaSimbolos, "Operador Relacional");
-        recorrerIterador(miLexico.getOperadoresLogicos(), tablaSimbolos, "Operador Logico");
-        recorrerIterador(miLexico.getDelimitadores(), tablaSimbolos, "Delimitador");
+        
+        panelLexico.setVisible(true);
+        panelLexico.setSize(jpPanelContenedor.getSize().width, jpPanelContenedor.getSize().height);
+        jpPanelContenedor.removeAll();
+        jpPanelContenedor.add(panelLexico);
+        jpPanelContenedor.repaint();
+        jpPanelContenedor.validate();
+        panelLexico.Rellenar(miLexico);
         
         
-        recorrerIteradorNoArray(miLexico.getNumerosEnteros(), tablaSimbolos, "300", "Numero Entero");
-        recorrerIteradorNoArray(miLexico.getNumerosReales(), tablaSimbolos, "301", "Numero Real");
-        recorrerIteradorNoArray(miLexico.getIdentificador(), tablaSimbolos, "100", "Identificador");
-        recorrerIteradorNoArray(miLexico.getCadenas(), tablaSimbolos, "302", "Dato Cadena");
-        recorrerIteradorNoArray(miLexico.getCaracteres(), tablaSimbolos, "303", "Dato Caracter");
-        */
         Iterator<String> iterador=miLexico.ObtenerErrores().keySet().iterator();
         String token="";
         if(miLexico.TieneErrores()){
@@ -175,7 +172,6 @@ public class jfPanelPrincipal extends javax.swing.JFrame {
             }
         }
         
-        //jtTablaAnalizaTodo.setModel(tablaSimbolos);
     }//GEN-LAST:event_btnAnalisisLexicoActionPerformed
 
     private void btnAnalisisSintacticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalisisSintacticoActionPerformed
@@ -183,36 +179,20 @@ public class jfPanelPrincipal extends javax.swing.JFrame {
         if(!miLexico.TieneErrores()){
             miSintactico.Analizar(miLexico.ObtenerCodigoAnalizado());
         }
+        
+        panelSintactico.setVisible(true);
+        panelSintactico.setSize(jpPanelContenedor.getSize().width, jpPanelContenedor.getSize().height);
+        jpPanelContenedor.removeAll();
+        jpPanelContenedor.add(panelSintactico);
+        jpPanelContenedor.repaint();
+        jpPanelContenedor.validate();
+        panelSintactico.Rellenar(miSintactico);
     }//GEN-LAST:event_btnAnalisisSintacticoActionPerformed
 
     private void btnAnalisisSemanticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalisisSemanticoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAnalisisSemanticoActionPerformed
 
-    /*private void recorrerIteradorNoArray(HashMap<String,Integer> palabras, DefaultTableModel tablaSimbolos,String numeroTok, String nom){
-        String token="";
-        Iterator<String> iterador=palabras.keySet().iterator();
-        while(iterador.hasNext()){
-            token = iterador.next();
-            if(palabras.get(token) > 0){
-                tablaSimbolos.addRow(new Object[]{numeroTok,palabras.get(token) ,token,nom});
-            }
-        }
-    }
-    private void recorrerIterador(HashMap<String,Integer[]> palabras, DefaultTableModel tablaSimbolos, String nom){
-        String token="";
-        Iterator<String> iterador=palabras.keySet().iterator();
-        while(iterador.hasNext()){
-            token = iterador.next();
-            if(palabras.get(token)[0] > 0){
-                tablaSimbolos.addRow(new Object[]{palabras.get(token)[1], palabras.get(token)[0],token,nom});
-            }
-        }
-    }*/
-    
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
