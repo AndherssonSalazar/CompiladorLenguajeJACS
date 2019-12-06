@@ -6,7 +6,9 @@ import java.util.LinkedList;
 
 import javax.swing.table.DefaultTableModel;
 import compiladorlenguajejacs.clases.AnalizadorLexico;
+import compiladorlenguajejacs.clases.AnalizadorSemantico;
 import compiladorlenguajejacs.clases.AnalizadorSintactico;
+import compiladorlenguajejacs.clases.LexicoSemantico;
 
 /**
  *
@@ -15,6 +17,8 @@ import compiladorlenguajejacs.clases.AnalizadorSintactico;
 
 public class jfPanelPrincipal extends javax.swing.JFrame {
     private AnalizadorLexico miLexico;
+    private LexicoSemantico lexicoSemantico;
+    private AnalizadorSemantico miSemantico;
     private AnalizadorSintactico miSintactico;
     private jpPanelLexico panelLexico;
     private jpPanelSintactico panelSintactico;
@@ -191,6 +195,13 @@ public class jfPanelPrincipal extends javax.swing.JFrame {
 
     private void btnAnalisisSemanticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalisisSemanticoActionPerformed
         // TODO add your handling code here:
+        lexicoSemantico=new LexicoSemantico();
+    	lexicoSemantico.Analizar(txtEditorCodigo.getText());
+    	miSemantico = new AnalizadorSemantico(lexicoSemantico.ObtenerCodigoSemantico());
+    	miSemantico.SegundaPasada();
+    	miSemantico.terceraPasada();
+    	miSemantico.cuartaPasada();
+        
     }//GEN-LAST:event_btnAnalisisSemanticoActionPerformed
 
     public static void main(String args[]) {

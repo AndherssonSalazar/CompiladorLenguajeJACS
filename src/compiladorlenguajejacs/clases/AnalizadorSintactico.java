@@ -54,7 +54,10 @@ private Stack<String> pila;
                      }
                  }else if((produccion=miTabla.ExisteInterseccion(elementoPila, token))!=null){
                      	System.out.printf("%1$-100S|%2$-100s|%3$-100S\n",pila.toString(),listaInput.toString(),produccion.toString());
-                 		pila.pop();
+                 	pilaMostrar.add(pila.toString());
+                        entradaMostrar.add(listaInput.toString());
+                        tokenMostrar.add(produccion.toString());	
+                        pila.pop();
                  		if(!produccion.getFirst().equals("&")) {
                  			while(!produccion.isEmpty()) {
                  				pila.push(produccion.pollLast());

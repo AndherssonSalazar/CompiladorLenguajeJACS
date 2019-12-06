@@ -1,5 +1,6 @@
 package compiladorlenguajejacs.clases;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
@@ -60,23 +61,21 @@ public class LexicoSemantico {
 	                    palabrasReservadas.put(token, new Integer[]{(palabrasReservadas.get(token))[0]+1,(palabrasReservadas.get(token))[1]});
 	                    if(token.equals("verdadero")){
 	                        codigoAnalizado.add("DBOOLEANO");
-	                        semantico.add(new Objeto(null,"booleano","valor","verdadero"));
+	                        semantico.add(new Objeto("","booleano","valor","verdadero"));
 	                    }else if(token.equals("falso")){
 	                        codigoAnalizado.add("DBOOLEANO");
-	                        semantico.add(new Objeto(null,"booleano","valor","falso"));
+	                        semantico.add(new Objeto("","booleano","valor","falso"));
 	                    }else{
 	                        codigoAnalizado.add(token);
-	                        semantico.add(new Objeto(token,null,"reservada",null));
+	                        semantico.add(new Objeto(token,"","reservada",""));
 	                    }
 	                }else{
 	                    if(operadoresAritmeticos.containsKey(token)){
 	                        //operadoresAritmeticos.put(token, new Integer[]{(operadoresAritmeticos.get(token))[0]+1,(operadoresAritmeticos.get(token))[1]});
-	                        StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}[]().;,!=+-*¬'/><|&# \"\n\t",true);
+	                        StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}().;,!=+[]-*'/><|&¬# \"\n\t",true);
 	                        int numeroTokenRecorredor=0-restaDobles;
 	                        String tokenReemplazo="";
-	                        switch(token){/*
-                                    jonny es una perra
-                                    */
+	                        switch(token){
 	                            case "+" :  
 	                                while(codigoBusqueda.hasMoreTokens() && numeroTokenRecorredor<=numeroToken){
 	                                    tokenReemplazo=codigoBusqueda.nextToken();
@@ -87,11 +86,11 @@ public class LexicoSemantico {
 	                                    tokenReemplazo=codigoALeer.nextToken();
 	                                    operadoresAritmeticos.put(token+tokenReemplazo,new Integer[]{(operadoresAritmeticos.get(token+tokenReemplazo))[0]+1,(operadoresAritmeticos.get(token+tokenReemplazo))[1]});
 	                                    codigoAnalizado.add(token+tokenReemplazo);
-	                                    semantico.add(new Objeto(token+tokenReemplazo,null,"operador","1"));
+	                                    semantico.add(new Objeto(token,"","operador","1"));
 	                                }else {
 	                                    operadoresAritmeticos.put(token, new Integer[]{(operadoresAritmeticos.get(token))[0]+1,(operadoresAritmeticos.get(token))[1]});
 	                                    codigoAnalizado.add(token);  
-	                                    semantico.add(new Objeto(token,null,"operador",null));
+	                                    semantico.add(new Objeto(token,"","operador",""));
 	                                }
 	                                break;
 	                            case "-" :  
@@ -104,24 +103,24 @@ public class LexicoSemantico {
 	                                    tokenReemplazo=codigoALeer.nextToken();
 	                                    operadoresAritmeticos.put(token+tokenReemplazo,new Integer[]{(operadoresAritmeticos.get(token+tokenReemplazo))[0]+1,(operadoresAritmeticos.get(token+tokenReemplazo))[1]});
 	                                    codigoAnalizado.add(token+tokenReemplazo);
-	                                    semantico.add(new Objeto(token,null,"operador","-1"));
+	                                    semantico.add(new Objeto(token,"","operador","-1"));
 	                                }else {
 	                                    operadoresAritmeticos.put(token, new Integer[]{(operadoresAritmeticos.get(token))[0]+1,(operadoresAritmeticos.get(token))[1]});
 	                                    codigoAnalizado.add(token);  
-	                                    semantico.add(new Objeto(token,null,"operador",null));
+	                                    semantico.add(new Objeto(token,"","operador",""));
 	                                }
 	                                break;
 	                            default : 
 	                                operadoresAritmeticos.put(token, new Integer[]{(operadoresAritmeticos.get(token))[0]+1,(operadoresAritmeticos.get(token))[1]});
 	                                codigoAnalizado.add(token);
-	                                semantico.add(new Objeto(token,null,"operador",null));
+	                                semantico.add(new Objeto(token,"","operador",""));
 	                                break;
 	                        }
 	                            
 	                        //codigoAnalizado.add(token);
 	                    }else{
 	                        if(operadoresRelacionales.containsKey(token)){
-	                            StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}()[].;,!=+-*'/¬><|&# \"\n\t",true);
+	                            StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}().;,!=+[]-*'/><|&¬# \"\n\t",true);
 	                            int numeroTokenRecorredor=0-restaDobles;
 	                            String tokenReemplazo="";
 	                            switch(token){
@@ -136,19 +135,19 @@ public class LexicoSemantico {
 	                                            tokenReemplazo=codigoALeer.nextToken();
 	                                            operadoresRelacionales.put(token+tokenReemplazo,new Integer[]{(operadoresRelacionales.get(token+tokenReemplazo))[0]+1,(operadoresRelacionales.get(token+tokenReemplazo))[1]});
 	                                            codigoAnalizado.add(token+tokenReemplazo);
-	                                            semantico.add(new Objeto(null,null,"igualdad",null));
+	                                            semantico.add(new Objeto("","","igualdad",""));
 	                                            break;
 	                                        case "-":
 	                                            restaDobles++;
 	                                            tokenReemplazo=codigoALeer.nextToken();
 	                                            delimitadores.put(token+tokenReemplazo, new Integer[]{(delimitadores.get(token+tokenReemplazo))[0]+1,(delimitadores.get(token+tokenReemplazo))[1]});
 	                                            codigoAnalizado.add(token+tokenReemplazo);
-	                                            semantico.add(new Objeto(null,null,"asignacion",null));
+	                                            semantico.add(new Objeto("","","asignacion",""));
 	                                            break;
 	                                        default:
 	                                            operadoresRelacionales.put(token,new Integer[]{(operadoresRelacionales.get(token))[0]+1,(operadoresRelacionales.get(token))[1]});
 	                                            codigoAnalizado.add(token);
-	                                            semantico.add(new Objeto(token,null,"relacionales",null));
+	                                            semantico.add(new Objeto(token,"","relacionales",""));
 	                                            break;
 	                                    }
 	                                    break;
@@ -163,24 +162,24 @@ public class LexicoSemantico {
 	                                            tokenReemplazo=codigoALeer.nextToken();
 	                                            operadoresRelacionales.put(token+tokenReemplazo,new Integer[]{(operadoresRelacionales.get(token+tokenReemplazo))[0]+1,(operadoresRelacionales.get(token+tokenReemplazo))[1]});
 	                                            codigoAnalizado.add(token+tokenReemplazo);
-	                                            semantico.add(new Objeto(token+ tokenReemplazo,null,"relacionales",null));
+	                                            semantico.add(new Objeto(token,"","relacionales",""));
 	                                            break;
 	                                        default:
 	                                            operadoresRelacionales.put(token,new Integer[]{(operadoresRelacionales.get(token))[0]+1,(operadoresRelacionales.get(token))[1]});
 	                                            codigoAnalizado.add(token);
-	                                            semantico.add(new Objeto(token,null,"relacionales",null));
+	                                            semantico.add(new Objeto(token,"","relacionales",""));
 	                                            break;
 	                                    }
 	                                    break;
 	                                default:
 	                                    operadoresRelacionales.put(token,new Integer[]{(operadoresRelacionales.get(token))[0]+1,(operadoresRelacionales.get(token))[1]});
 	                                    codigoAnalizado.add(token);
-	                                    semantico.add(new Objeto(token,null,"relacionales",null));
+	                                    semantico.add(new Objeto(token,"","relacionales",""));
 	                                    break;
 	                            }
 	                        }else{
 	                            if("!".equals(token)){
-	                                StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}()[].;,!=+¬-*'/><|&# \"\n\t",true);
+	                                StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}().;,!=+[]-*'/><|&¬# \"\n\t",true);
 	                                int numeroTokenRecorredor=0-restaDobles;
 	                                String tokenReemplazo="";
 	                                while(codigoBusqueda.hasMoreTokens() && numeroTokenRecorredor<=numeroToken){
@@ -192,13 +191,13 @@ public class LexicoSemantico {
 	                                    tokenReemplazo=codigoALeer.nextToken();
 	                                    operadoresRelacionales.put(token+tokenReemplazo,new Integer[]{(operadoresRelacionales.get(token+tokenReemplazo))[0]+1,(operadoresRelacionales.get(token+tokenReemplazo))[1]});
 	                                    codigoAnalizado.add(token+tokenReemplazo);
-	                                    semantico.add(new Objeto(null,null,"desigualdad",null));
+	                                    semantico.add(new Objeto("","","desigualdad",""));
 	                                    
 	                                }else{
 	                                    errores.put(token, (errores.get(token)==null)?1:errores.get(token)+1);
 	                                }
 	                            }else if("&".equals(token)){
-	                                StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}().;[],!=+-*¬'/><|&# \"\n\t",true);
+	                                StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}().;,!=+[]-*'/><|&¬# \"\n\t",true);
 	                                int numeroTokenRecorredor=0-restaDobles;
 	                                String tokenReemplazo="";
 	                                while(codigoBusqueda.hasMoreTokens() && numeroTokenRecorredor<=numeroToken){
@@ -210,12 +209,12 @@ public class LexicoSemantico {
 	                                    tokenReemplazo=codigoALeer.nextToken();
 	                                    operadoresLogicos.put(token+tokenReemplazo,new Integer[]{(operadoresLogicos.get(token+tokenReemplazo))[0]+1,(operadoresLogicos.get(token+tokenReemplazo))[1]});
 	                                    codigoAnalizado.add(token+tokenReemplazo);
-	                                    semantico.add(new Objeto(token,null,"logicos",null));
+	                                    semantico.add(new Objeto(token,"","logicos",""));
 	                                }else{
 	                                    errores.put(token, (errores.get(token)==null)?1:errores.get(token)+1);
 	                                }
 	                            }else if("|".equals(token)){
-	                                StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}().;[],!=+-*'/¬><|&# \"\n\t",true);
+	                                StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}().;,!=+[]-*'/><|&¬# \"\n\t",true);
 	                                int numeroTokenRecorredor=0-restaDobles;
 	                                String tokenReemplazo="";
 	                                while(codigoBusqueda.hasMoreTokens() && numeroTokenRecorredor<=numeroToken){
@@ -227,14 +226,14 @@ public class LexicoSemantico {
 	                                    tokenReemplazo=codigoALeer.nextToken();
 	                                    operadoresLogicos.put(token+tokenReemplazo,new Integer[]{(operadoresLogicos.get(token+tokenReemplazo))[0]+1,(operadoresLogicos.get(token+tokenReemplazo))[1]});
 	                                    codigoAnalizado.add(token+tokenReemplazo);
-	                                    semantico.add(new Objeto(token,null,"logicos",null));
+	                                    semantico.add(new Objeto(token,"","logicos",""));
 	                                }else{
 	                                    errores.put(token, (errores.get(token)==null)?1:errores.get(token)+1);
 	                                }
 	                            }else if(operadoresLogicos.containsKey(token)){
 	                                operadoresLogicos.put(token,new Integer[]{(operadoresLogicos.get(token))[0]+1,(operadoresLogicos.get(token))[1]});
 	                                codigoAnalizado.add(token);
-	                                semantico.add(new Objeto(token,null,"logicos",null));
+	                                semantico.add(new Objeto(token,"","logicos",""));
 	                            }else{
 	                                if(delimitadores.containsKey(token)){
 	                                    delimitadores.put(token, new Integer[]{(delimitadores.get(token))[0]+1,(delimitadores.get(token))[1]});
@@ -265,7 +264,7 @@ public class LexicoSemantico {
 	                                        if(tokenAEvaluar.equals("\"")){
 	                                        	cadenas.put(cadena, (cadenas.get(token)==null)?1:cadenas.get(token)+1);
 	                                            codigoAnalizado.add("DCADENA");
-	                                            semantico.add(new Objeto(null,"cadena","valor",token));
+	                                            semantico.add(new Objeto("","cadena","valor",token));
 	                                            delimitadores.put(token, new Integer[]{(delimitadores.get(token))[0]+1,(delimitadores.get(token))[1]});
 	                                        }else{
 	                                            errores.put(token, (errores.get(token)==null)?1:errores.get(token)+1);
@@ -293,7 +292,7 @@ public class LexicoSemantico {
 	                                        }
 	                                    }else{
 	                                        codigoAnalizado.add(token);
-	                                        semantico.add(new Objeto(token,null,"strange",null));
+	                                        semantico.add(new Objeto(token,"","delimitador",""));
 	                                        
 	                                    }
 	                                    /*else{
@@ -303,17 +302,17 @@ public class LexicoSemantico {
 	                                    if(token.matches("([A-Z a-z]|[_])+([0-9]|[A-Z a-z]|[_])*")){
 	                                        identificador.put(token, (identificador.get(token)==null)?1:identificador.get(token)+1);
 	                                        codigoAnalizado.add("id");
-	                                        semantico.add(new Objeto(token,null,"identificador",null));
+	                                        semantico.add(new Objeto(token,"","identificador",""));
 	                                    }else{
 	                                        if(token.matches("[0-9]+")){
 	                                            numerosEnteros.put(token, (numerosEnteros.get(token)==null)?1:numerosEnteros.get(token)+1);
 	                                            codigoAnalizado.add("DNUMERICO");
-	                                            semantico.add(new Objeto(null,"entero","valor",token));
+	                                            semantico.add(new Objeto("","entero","valor",token));
 	                                        }else{
 	                                            if(token.matches("[0-9]*.[0-9]+")){
 	                                                numerosReales.put(token, (numerosReales.get(token)==null)?1:numerosReales.get(token)+1);
 	                                                codigoAnalizado.add("DREAL");
-	                                                semantico.add(new Objeto(null,"real","valor",token));
+	                                                semantico.add(new Objeto("","real","valor",token));
 	                                            }else{
 	                                                errores.put(token, (errores.get(token)==null)?1:errores.get(token)+1);
 	                                            }
