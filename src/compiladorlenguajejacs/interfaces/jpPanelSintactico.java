@@ -1,6 +1,7 @@
 package compiladorlenguajejacs.interfaces;
 
 import compiladorlenguajejacs.clases.AnalizadorSintactico;
+import java.util.LinkedList;
 
 /**
  *
@@ -11,7 +12,18 @@ public class jpPanelSintactico extends javax.swing.JPanel {
         initComponents();
     }
     public void Rellenar(AnalizadorSintactico miSintactico){
-        
+        LinkedList<String> recorredor=miSintactico.obtenerPilaMostrar();
+        for(String a: recorredor){
+            txtSintacticoPila.setText(txtSintacticoPila.getText()+"\n"+a);
+        }
+        recorredor=miSintactico.obtenerEntradaMostrar();
+        for(String a: recorredor){
+            txtSintacticoEntrada.setText(txtSintacticoEntrada.getText()+"\n"+a);
+        }
+        recorredor=miSintactico.obtenerTokenMostrar();
+        for(String a: recorredor){
+            txtSintacticoProducciones.setText(txtSintacticoProducciones.getText()+"\n"+a);
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -35,18 +47,21 @@ public class jpPanelSintactico extends javax.swing.JPanel {
 
         jspSintacticoPila.setPreferredSize(new java.awt.Dimension(225, 380));
 
+        txtSintacticoPila.setEditable(false);
         txtSintacticoPila.setColumns(20);
         txtSintacticoPila.setRows(5);
         jspSintacticoPila.setViewportView(txtSintacticoPila);
 
         jspSintacticoEntrada.setPreferredSize(new java.awt.Dimension(225, 380));
 
+        txtSintacticoEntrada.setEditable(false);
         txtSintacticoEntrada.setColumns(20);
         txtSintacticoEntrada.setRows(5);
         jspSintacticoEntrada.setViewportView(txtSintacticoEntrada);
 
         jspSintacticoProducciones.setPreferredSize(new java.awt.Dimension(200, 380));
 
+        txtSintacticoProducciones.setEditable(false);
         txtSintacticoProducciones.setColumns(20);
         txtSintacticoProducciones.setRows(5);
         jspSintacticoProducciones.setViewportView(txtSintacticoProducciones);
