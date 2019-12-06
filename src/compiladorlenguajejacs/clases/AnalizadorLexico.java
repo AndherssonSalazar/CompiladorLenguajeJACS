@@ -52,7 +52,7 @@ public class AnalizadorLexico {
         RellenarSimbolosOperadoresLogicos(operadoresLogicos);
         RellenarSimbolosDelimitadores(delimitadores);
         
-        StringTokenizer codigoALeer = new StringTokenizer(codigoAAnalizar,"{}().;,!=+-*'/><|&# \"\n\t",true);
+        StringTokenizer codigoALeer = new StringTokenizer(codigoAAnalizar,"{}().;,!=+[]-*'/><|&¬# \"\n\t",true);
         String token="";
         int numeroToken=0;
         int restaDobles=0;
@@ -71,11 +71,51 @@ public class AnalizadorLexico {
                     }
                 }else{
                     if(operadoresAritmeticos.containsKey(token)){
-                        operadoresAritmeticos.put(token, new Integer[]{(operadoresAritmeticos.get(token))[0]+1,(operadoresAritmeticos.get(token))[1]});
-                        codigoAnalizado.add(token);
+                        //operadoresAritmeticos.put(token, new Integer[]{(operadoresAritmeticos.get(token))[0]+1,(operadoresAritmeticos.get(token))[1]});
+                        StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}[]().;,!=+-*¬'/><|&# \"\n\t",true);
+                        int numeroTokenRecorredor=0-restaDobles;
+                        String tokenReemplazo="";
+                        switch(token){
+                            case "+" :  
+                                while(codigoBusqueda.hasMoreTokens() && numeroTokenRecorredor<=numeroToken){
+                                    tokenReemplazo=codigoBusqueda.nextToken();
+                                    numeroTokenRecorredor++;
+                                }
+                                if(tokenReemplazo.equals("+")){
+                                    restaDobles++;
+                                    tokenReemplazo=codigoALeer.nextToken();
+                                    operadoresAritmeticos.put(token+tokenReemplazo,new Integer[]{(operadoresAritmeticos.get(token+tokenReemplazo))[0]+1,(operadoresAritmeticos.get(token+tokenReemplazo))[1]});
+                                    codigoAnalizado.add(token+tokenReemplazo);
+                                }else {
+                                    operadoresAritmeticos.put(token, new Integer[]{(operadoresAritmeticos.get(token))[0]+1,(operadoresAritmeticos.get(token))[1]});
+                                    codigoAnalizado.add(token);  
+                                }
+                                break;
+                            case "-" :  
+                                while(codigoBusqueda.hasMoreTokens() && numeroTokenRecorredor<=numeroToken){
+                                    tokenReemplazo=codigoBusqueda.nextToken();
+                                    numeroTokenRecorredor++;
+                                }
+                                if(tokenReemplazo.equals("-")){
+                                    restaDobles++;
+                                    tokenReemplazo=codigoALeer.nextToken();
+                                    operadoresAritmeticos.put(token+tokenReemplazo,new Integer[]{(operadoresAritmeticos.get(token+tokenReemplazo))[0]+1,(operadoresAritmeticos.get(token+tokenReemplazo))[1]});
+                                    codigoAnalizado.add(token+tokenReemplazo);
+                                }else {
+                                    operadoresAritmeticos.put(token, new Integer[]{(operadoresAritmeticos.get(token))[0]+1,(operadoresAritmeticos.get(token))[1]});
+                                    codigoAnalizado.add(token);  
+                                }
+                                break;
+                            default : 
+                                operadoresAritmeticos.put(token, new Integer[]{(operadoresAritmeticos.get(token))[0]+1,(operadoresAritmeticos.get(token))[1]});
+                                codigoAnalizado.add(token);
+                                break;
+                        }
+                            
+                        //codigoAnalizado.add(token);
                     }else{
                         if(operadoresRelacionales.containsKey(token)){
-                            StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}().;,!=+-*'/><|&# \"\n\t",true);
+                            StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}()[].;,!=+-*'/¬><|&# \"\n\t",true);
                             int numeroTokenRecorredor=0-restaDobles;
                             String tokenReemplazo="";
                             switch(token){
@@ -128,7 +168,7 @@ public class AnalizadorLexico {
                             }
                         }else{
                             if("!".equals(token)){
-                                StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}().;,!=+-*'/><|&# \"\n\t",true);
+                                StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}()[].;,!=+¬-*'/><|&# \"\n\t",true);
                                 int numeroTokenRecorredor=0-restaDobles;
                                 String tokenReemplazo="";
                                 while(codigoBusqueda.hasMoreTokens() && numeroTokenRecorredor<=numeroToken){
@@ -139,12 +179,12 @@ public class AnalizadorLexico {
                                     restaDobles++;
                                     tokenReemplazo=codigoALeer.nextToken();
                                     operadoresRelacionales.put(token+tokenReemplazo,new Integer[]{(operadoresRelacionales.get(token+tokenReemplazo))[0]+1,(operadoresRelacionales.get(token+tokenReemplazo))[1]});
-                                    codigoAnalizado.add(token);
+                                    codigoAnalizado.add(token+tokenReemplazo);
                                 }else{
                                     errores.put(token, (errores.get(token)==null)?1:errores.get(token)+1);
                                 }
                             }else if("&".equals(token)){
-                                StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}().;,!=+-*'/><|&# \"\n\t",true);
+                                StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}().;[],!=+-*¬'/><|&# \"\n\t",true);
                                 int numeroTokenRecorredor=0-restaDobles;
                                 String tokenReemplazo="";
                                 while(codigoBusqueda.hasMoreTokens() && numeroTokenRecorredor<=numeroToken){
@@ -155,12 +195,12 @@ public class AnalizadorLexico {
                                     restaDobles++;
                                     tokenReemplazo=codigoALeer.nextToken();
                                     operadoresLogicos.put(token+tokenReemplazo,new Integer[]{(operadoresLogicos.get(token+tokenReemplazo))[0]+1,(operadoresLogicos.get(token+tokenReemplazo))[1]});
-                                    codigoAnalizado.add(token);
+                                    codigoAnalizado.add(token+tokenReemplazo);
                                 }else{
                                     errores.put(token, (errores.get(token)==null)?1:errores.get(token)+1);
                                 }
                             }else if("|".equals(token)){
-                                StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}().;,!=+-*'/><|&# \"\n\t",true);
+                                StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}().;[],!=+-*'/¬><|&# \"\n\t",true);
                                 int numeroTokenRecorredor=0-restaDobles;
                                 String tokenReemplazo="";
                                 while(codigoBusqueda.hasMoreTokens() && numeroTokenRecorredor<=numeroToken){
@@ -171,7 +211,7 @@ public class AnalizadorLexico {
                                     restaDobles++;
                                     tokenReemplazo=codigoALeer.nextToken();
                                     operadoresLogicos.put(token+tokenReemplazo,new Integer[]{(operadoresLogicos.get(token+tokenReemplazo))[0]+1,(operadoresLogicos.get(token+tokenReemplazo))[1]});
-                                    codigoAnalizado.add(token);
+                                    codigoAnalizado.add(token+tokenReemplazo);
                                 }else{
                                     errores.put(token, (errores.get(token)==null)?1:errores.get(token)+1);
                                 }
@@ -327,6 +367,8 @@ public class AnalizadorLexico {
         operadores.put("/", new Integer[]{0,203});
         operadores.put("%", new Integer[]{0,204});
         operadores.put("^", new Integer[]{0,205});
+        operadores.put("++", new Integer[]{0,206});
+        operadores.put("--", new Integer[]{0,207});
     }
     private void RellenarSimbolosOperadoresRelacionales(HashMap<String, Integer[]> operadores){
         operadores.put("=",  new Integer[]{0,206});
@@ -355,6 +397,8 @@ public class AnalizadorLexico {
         delimitadores.put("#", new Integer[]{0,223});
         delimitadores.put("\"",new Integer[]{0,224});
         delimitadores.put("'",new Integer[]{0,225});
+        delimitadores.put("[",new Integer[]{0,226});
+        delimitadores.put("]",new Integer[]{0,227});
     }
     private void RellenarSimbolosPalabrasReservadas(HashMap<String, Integer[]> palabrasReservadas){
         palabrasReservadas.put("entero", new Integer[]{0,400});

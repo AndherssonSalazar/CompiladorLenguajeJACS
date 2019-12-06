@@ -75,7 +75,8 @@ private Stack<String> pila;
     		System.out.printf("%1$-100S|%2$-100S|%3$-100S\n","[$]","[$]",mensaje);
     	}else {
     		System.out.printf("%1$-100S|%2$-100S|%3$-100S\n",mensaje,mensaje,mensaje);
+                System.exit(0);
     	}
-    	System.exit(0);
+    	
     }
 }
