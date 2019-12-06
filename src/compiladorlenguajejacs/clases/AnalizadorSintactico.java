@@ -13,7 +13,7 @@ import java.util.Stack;
  * @author CHRISTOPER
  */
 enum Modo{
-	ERROR, CORRECTO
+        ERROR, CORRECTO
 }
 
 public class AnalizadorSintactico {
