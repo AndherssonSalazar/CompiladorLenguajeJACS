@@ -75,7 +75,9 @@ public class LexicoSemantico {
 	                        StringTokenizer codigoBusqueda=new StringTokenizer(codigoAAnalizar,"{}[]().;,!=+-*¬'/><|&# \"\n\t",true);
 	                        int numeroTokenRecorredor=0-restaDobles;
 	                        String tokenReemplazo="";
-	                        switch(token){
+	                        switch(token){/*
+                                    jonny es una perra
+                                    */
 	                            case "+" :  
 	                                while(codigoBusqueda.hasMoreTokens() && numeroTokenRecorredor<=numeroToken){
 	                                    tokenReemplazo=codigoBusqueda.nextToken();
@@ -86,7 +88,7 @@ public class LexicoSemantico {
 	                                    tokenReemplazo=codigoALeer.nextToken();
 	                                    operadoresAritmeticos.put(token+tokenReemplazo,new Integer[]{(operadoresAritmeticos.get(token+tokenReemplazo))[0]+1,(operadoresAritmeticos.get(token+tokenReemplazo))[1]});
 	                                    codigoAnalizado.add(token+tokenReemplazo);
-	                                    semantico.add(new Objeto(token,null,"operador","1"));
+	                                    semantico.add(new Objeto(token+tokenReemplazo,null,"operador","1"));
 	                                }else {
 	                                    operadoresAritmeticos.put(token, new Integer[]{(operadoresAritmeticos.get(token))[0]+1,(operadoresAritmeticos.get(token))[1]});
 	                                    codigoAnalizado.add(token);  
@@ -162,7 +164,7 @@ public class LexicoSemantico {
 	                                            tokenReemplazo=codigoALeer.nextToken();
 	                                            operadoresRelacionales.put(token+tokenReemplazo,new Integer[]{(operadoresRelacionales.get(token+tokenReemplazo))[0]+1,(operadoresRelacionales.get(token+tokenReemplazo))[1]});
 	                                            codigoAnalizado.add(token+tokenReemplazo);
-	                                            semantico.add(new Objeto(token,null,"relacionales",null));
+	                                            semantico.add(new Objeto(token+ tokenReemplazo,null,"relacionales",null));
 	                                            break;
 	                                        default:
 	                                            operadoresRelacionales.put(token,new Integer[]{(operadoresRelacionales.get(token))[0]+1,(operadoresRelacionales.get(token))[1]});
