@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/InformacionImportante/LENGUAJES_DE_PROGRAMACION/Java/NetBeans/CompiladorLenguajeJACS/CompiladorLenguajeJACS/src/compiladorlenguajejacs/clases/AnalizadorSintactico.java</file>
             <file>file:/D:/InformacionImportante/LENGUAJES_DE_PROGRAMACION/Java/NetBeans/CompiladorLenguajeJACS/CompiladorLenguajeJACS/src/compiladorlenguajejacs/interfaces/jpPanelSintactico.java</file>
             <file>file:/D:/InformacionImportante/LENGUAJES_DE_PROGRAMACION/Java/NetBeans/CompiladorLenguajeJACS/CompiladorLenguajeJACS/src/compiladorlenguajejacs/clases/AnalizadorSemantico.java</file>
@@ -10,6 +11,10 @@
             <file>file:/D:/InformacionImportante/LENGUAJES_DE_PROGRAMACION/Java/NetBeans/CompiladorLenguajeJACS/CompiladorLenguajeJACS/src/compiladorlenguajejacs/clases/TAS.java</file>
             <file>file:/D:/InformacionImportante/LENGUAJES_DE_PROGRAMACION/Java/NetBeans/CompiladorLenguajeJACS/CompiladorLenguajeJACS/src/compiladorlenguajejacs/clases/LexicoSemantico.java</file>
             <file>file:/D:/InformacionImportante/LENGUAJES_DE_PROGRAMACION/Java/NetBeans/CompiladorLenguajeJACS/CompiladorLenguajeJACS/src/compiladorlenguajejacs/interfaces/jfPanelPrincipal.java</file>
+=======
+            <file>file:/C:/Users/CHRISTOPER/Documents/GitHub/CompiladorLenguajeJACS/src/compiladorlenguajejacs/clases/Objeto.java</file>
+            <file>file:/C:/Users/CHRISTOPER/Documents/GitHub/CompiladorLenguajeJACS/src/compiladorlenguajejacs/clases/LexicoSemantico.java</file>
+>>>>>>> 63a0800d5be0a37f234106b100621e4179543b11
         </group>
     </open-files>
 </project-private>
