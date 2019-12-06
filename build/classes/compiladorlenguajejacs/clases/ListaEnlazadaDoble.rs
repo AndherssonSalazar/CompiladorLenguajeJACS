@@ -1,2 +1,0 @@
-LenguajeJACSantesDeSemantico.clases.ListaEnlazadaDoble$IteradorLista
-LenguajeJACSantesDeSemantico.clases.ListaEnlazadaDoble

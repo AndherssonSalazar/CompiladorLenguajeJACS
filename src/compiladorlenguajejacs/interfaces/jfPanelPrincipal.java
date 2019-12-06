@@ -6,7 +6,9 @@ import java.util.LinkedList;
 
 import javax.swing.table.DefaultTableModel;
 import compiladorlenguajejacs.clases.AnalizadorLexico;
+import compiladorlenguajejacs.clases.AnalizadorSemantico;
 import compiladorlenguajejacs.clases.AnalizadorSintactico;
+import compiladorlenguajejacs.clases.LexicoSemantico;
 
 /**
  *
@@ -16,11 +18,14 @@ import compiladorlenguajejacs.clases.AnalizadorSintactico;
 public class jfPanelPrincipal extends javax.swing.JFrame {
     private AnalizadorLexico miLexico;
     private AnalizadorSintactico miSintactico;
+    private LexicoSemantico lexicoSemantico;
+    private AnalizadorSemantico miSemantico;    
     private DefaultTableModel tablaSimbolos;
     public jfPanelPrincipal() {
         miLexico=new AnalizadorLexico();
         miSintactico=new AnalizadorSintactico();
         initComponents();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -236,7 +241,11 @@ public class jfPanelPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAnalisisSintacticoActionPerformed
 
     private void btnAnalisisSemanticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalisisSemanticoActionPerformed
-        // TODO add your handling code here:
+    	lexicoSemantico=new LexicoSemantico();
+    	lexicoSemantico.Analizar(txtEditorCodigo.getText());
+    	miSemantico = new AnalizadorSemantico(lexicoSemantico.ObtenerCodigoSemantico());
+    	miSemantico.probando();
+    
     }//GEN-LAST:event_btnAnalisisSemanticoActionPerformed
 
     private void recorrerIteradorNoArray(HashMap<String,Integer> palabras, DefaultTableModel tablaSimbolos,String numeroTok, String nom){

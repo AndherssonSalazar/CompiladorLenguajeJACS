@@ -1,0 +1,37 @@
+[33mcommit 89433ae42cabed7f6e9f546a2775a5177a960373[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Jonny Diego Mejia Quispe <jonny.mejiaq@gmail.com>
+Date:   Fri Dec 6 08:31:43 2019 -0500
+
+    Version 1.0.4
+
+[33mcommit 6b47a847fb2ff66a92c44abb8e4d11036a24743b[m
+Author: Andhersson Salazar <andhersson.salazar@gmail.com>
+Date:   Thu Dec 5 20:53:54 2019 -0500
+
+    Version 1.0.3
+    
+    Lista Enlazada Doble
+    
+    Co-Authored-By: Andhersson Salazar <andhersson.salazar@gmail.com>
+
+[33mcommit 4e1840635664513b64ed0b77da30e55c41905424[m
+Author: Andhersson Salazar <andhersson.salazar@gmail.com>
+Date:   Thu Dec 5 20:03:13 2019 -0500
+
+    Version 1.0.2
+    
+    Lista Enlazada Doble
+    
+    Co-Authored-By: Andhersson Salazar <andhersson.salazar@gmail.com>
+
+[33mcommit 1d2fbd1ead60ecb2bdabad9f6b106a4c79b4cbc5[m
+Author: Jonny Diego Mejia Quispe <jonny.mejiaq@gmail.com>
+Date:   Thu Dec 5 19:28:36 2019 -0500
+
+    Version 1.0.1
+
+[33mcommit 751a6dc5c1c061cc50cc9dba6ba037608a34d275[m
+Author: Andhersson Salazar <andhersson.salazar@gmail.com>
+Date:   Thu Dec 5 19:03:48 2019 -0500
+
+    Initial commit

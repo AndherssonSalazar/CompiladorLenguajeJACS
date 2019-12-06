@@ -1,2 +1,0 @@
-compiladorlenguajejacs.clases.Modo
-compiladorlenguajejacs.clases.AnalizadorSintactico
