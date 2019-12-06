@@ -244,7 +244,10 @@ public class jfPanelPrincipal extends javax.swing.JFrame {
     	lexicoSemantico=new LexicoSemantico();
     	lexicoSemantico.Analizar(txtEditorCodigo.getText());
     	miSemantico = new AnalizadorSemantico(lexicoSemantico.ObtenerCodigoSemantico());
-    	miSemantico.probando();
+    	miSemantico.SegundaPasada();
+    	miSemantico.terceraPasada();
+    	miSemantico.cuartaPasada();
+    	
     
     }//GEN-LAST:event_btnAnalisisSemanticoActionPerformed
 
