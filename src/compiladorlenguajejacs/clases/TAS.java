@@ -6,11 +6,11 @@ import java.util.LinkedList;
  *
  * @author Andhersson Salazar
  */
-public class tablaTAS {
+public class TAS {
     int num = 60;
     private String M[][]= new String[num][num];
     private String produccion="";
-    public tablaTAS(){          // se inicializa la tabla
+    public TAS(){          // se inicializa la tabla
         for(int i=0; i<num; i++)
            for(int j=0; j<num; j++){
                M[i][j]=" ";

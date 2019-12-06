@@ -32,7 +32,7 @@ private Stack<String> pila;
     
     public void Analizar(LinkedList<String> listaInput){
         inicializar();
-        tablaTAS miTabla=new tablaTAS();
+        TAS miTabla=new TAS();
         String token="", elementoPila="";
         listaInput.add("$");
         do{	
